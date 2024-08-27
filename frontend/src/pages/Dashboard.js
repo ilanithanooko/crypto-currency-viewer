@@ -113,8 +113,8 @@ const Dashboard = () => {
                   <td>
                     <Sparklines
                       data={crypto.sparkline}
-                      svgHeight={50}
-                      svgWidth={150}
+                      svgHeight={30}
+                      svgWidth={120}
                     >
                       <SparklinesLine
                         color={crypto.todayChange >= 0 ? "green" : "red"}
