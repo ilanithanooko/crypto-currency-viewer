@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 });
 
 // Enable CORS for all routes
-const allowedOrigins = ['https://crypto-currency-viewer-frontend.vercel.app/', 'http://localhost:3000'];
+const allowedOrigins = ['https://crypto-currency-viewer-frontend.vercel.app', 'http://localhost:3000'];
 
 app.use(cors({
   origin: function(origin, callback) {
