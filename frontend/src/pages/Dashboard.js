@@ -55,51 +55,64 @@ const Dashboard = () => {
         <div className="mb-3 text-center">
           <h3>Cryptocurrency Prices</h3>
           <div>
-            <strong>Companies:</strong> {cryptoData.length.toLocaleString()} &nbsp;|&nbsp;
-            <strong>Total Market Cap:</strong> ${totalMarketCap.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} 
+            <strong>Companies:</strong> {cryptoData.length.toLocaleString()}{" "}
+            &nbsp;|&nbsp;
+            <strong>Total Market Cap:</strong> $
+            {totalMarketCap.toLocaleString("en-US", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
           </div>
         </div>
-        <table id="cryptoTable" className="table table-striped display">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Name</th>
-              <th>Market Cap</th>
-              <th>Price</th>
-              <th>Today</th>
-              <th>Price Trend (7 days)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cryptoData.map((crypto, index) => (
-              <tr key={index}>
-                <td>{crypto.rank}</td>
-                <td>
-                  <img
-                    src={crypto.image}
-                    alt={`${crypto.name} logo`}
-                    style={{ width: "20px", marginRight: "10px" }}
-                  />
-                  {crypto.name}
-                </td>
-                <td>${crypto.marketCap.toLocaleString()}</td>
-                <td>${crypto.price}</td>
-                <td
-                  style={{
-                    color: crypto.todayChange >= 0 ? "green" : "red",
-                  }}
-                >
-                  {crypto.todayChange.toFixed(2)}%
-                </td>
-                <td>
-                  <Sparklines data={crypto.sparkline} svgHeight={50} svgWidth={150}>
-                    <SparklinesLine color={crypto.todayChange >= 0 ? "green" : "red"} />
-                  </Sparklines>
-                </td>
+        <div className="table-responsive">
+          <table id="cryptoTable" className="table table-striped display">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Market Cap</th>
+                <th>Price</th>
+                <th>Today</th>
+                <th>Price Trend (7 days)</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {cryptoData.map((crypto, index) => (
+                <tr key={index}>
+                  <td>{crypto.rank}</td>
+                  <td>
+                    <img
+                      src={crypto.image}
+                      alt={`${crypto.name} logo`}
+                      style={{ width: "20px", marginRight: "10px" }}
+                    />
+                    {crypto.name}
+                  </td>
+                  <td>${crypto.marketCap.toLocaleString()}</td>
+                  <td>${crypto.price}</td>
+                  <td
+                    style={{
+                      color: crypto.todayChange >= 0 ? "green" : "red",
+                    }}
+                  >
+                    {crypto.todayChange.toFixed(2)}%
+                  </td>
+                  <td>
+                    <Sparklines
+                      data={crypto.sparkline}
+                      svgHeight={50}
+                      svgWidth={150}
+                    >
+                      <SparklinesLine
+                        color={crypto.todayChange >= 0 ? "green" : "red"}
+                      />
+                    </Sparklines>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
