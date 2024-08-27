@@ -68,7 +68,7 @@ const Dashboard = () => {
           <table id="cryptoTable" className="table table-striped display">
             <thead>
               <tr>
-                <th>Rank</th>
+                <th className="w-2">Rank</th>
                 <th>Name</th>
                 <th>Market Cap</th>
                 <th>Price</th>
