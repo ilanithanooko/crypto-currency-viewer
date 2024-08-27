@@ -51,6 +51,19 @@ const Dashboard = () => {
 
   return (
     <div className="container-fluid col-xl-7">
+      <style>
+        {`
+          @media (max-width: 576px) {
+            #cryptoTable td, #cryptoTable th {
+              font-size: 12px; /* Smaller font size for mobile devices */
+            }
+            #cryptoTable img {
+              width: 15px; /* Smaller image size for mobile devices */
+              margin-right: 5px;
+            }
+          }
+        `}
+      </style>
       <div>
         <div className="mb-3 text-center">
           <h3>Cryptocurrency Prices</h3>
@@ -64,7 +77,7 @@ const Dashboard = () => {
             })}
           </div>
         </div>
-        <div className="table-responsive container-fluid">
+        <div className="table-responsive">
           <table id="cryptoTable" className="table table-striped display">
             <thead>
               <tr>
