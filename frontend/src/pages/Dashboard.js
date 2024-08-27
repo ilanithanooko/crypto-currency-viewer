@@ -6,9 +6,9 @@ import "datatables.net";
 // Function to format numbers in millions (M) or billions (B)
 const formatMarketCap = (num) => {
   if (num >= 1e9) {
-    return (num / 1e9).toFixed(2) + 'B'; // Convert to billions
+    return (num / 1e9).toFixed(2) + '<strong>B</strong>'; // Convert to billions
   } else if (num >= 1e6) {
-    return (num / 1e6).toFixed(2) + 'M'; // Convert to millions
+    return (num / 1e6).toFixed(2) + '<strong>M</strong>'; // Convert to millions
   }
   return num.toLocaleString(); // Return number with commas for smaller numbers
 };
@@ -120,8 +120,8 @@ const Dashboard = () => {
                   <td>
                     <Sparklines
                       data={crypto.sparkline}
-                      svgHeight={50}
-                      svgWidth={150}
+                      svgHeight={30}
+                      svgWidth={110}
                     >
                       <SparklinesLine
                         color={crypto.todayChange >= 0 ? "green" : "red"}
