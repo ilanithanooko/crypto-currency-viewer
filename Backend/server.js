@@ -16,8 +16,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => {
-  res.json({ mssg: "Welcome to the app" });
+app.get('/', (req, res) => {
+  res.send('Welcome to Crypto Currency Viewer API');
 });
 
 app.use("/api/user", userRoutes);
