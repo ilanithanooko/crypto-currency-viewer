@@ -64,7 +64,7 @@ const Dashboard = () => {
             })}
           </div>
         </div>
-        <div className="table-responsive">
+        <div className="table-responsive container-fluid">
           <table id="cryptoTable" className="table table-striped display">
             <thead>
               <tr>
