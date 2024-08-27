@@ -10,11 +10,25 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
+
+// Enable CORS for all routes
+const allowedOrigins = ['https://crypto-currency-viewer-frontend.vercel.app/', 'http://localhost:3000'];
+
+app.use(cors({
+  origin: function(origin, callback) {
+    // allow requests with no origin (like mobile apps, curl, postman)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 app.get('/', (req, res) => {
   res.send('Welcome to Crypto Currency Viewer API');
