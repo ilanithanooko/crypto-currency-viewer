@@ -12,7 +12,7 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const response = await fetch(`/api/nodemailer`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/nodemailer`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
