@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSignup } from "../hooks/useSignup";
 import HeroPicture from "../assets/HeroPicture.jpg";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -6,7 +6,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState(""); // Added name state
+  const [name, setName] = useState("");
   const { signup, error, isLoading } = useSignup();
   const { user } = useAuthContext();
 
@@ -14,30 +14,37 @@ const Signup = () => {
     e.preventDefault();
 
     await signup(email, password);
-
-    // Fetch to send a signup email
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/nodemailer`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        // Handle token, only attach it if the user is already authenticated
-        ...(user && { Authorization: `Bearer ${user.token}` }),
-      },
-      body: JSON.stringify({
-        name: name,
-        email,
-        subject: 'Welcome to Crypto Currency Viewer!',
-        message: 'We are excited to have you join us on this journey!',
-        type: 'signup'
-      }),
-    });
-
-    if (response.ok) {
-      console.log("Signup email sent successfully");
-    } else {
-      console.error("Failed to send signup email");
-    }
   };
+
+  // Trigger email sending after successful signup
+  useEffect(() => {
+    if (!isLoading && !error && user) {  // Check that loading has finished, there is no error, and user is logged in
+      const sendSignupEmail = async () => {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/nodemailer`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(user && { Authorization: `Bearer ${user.token}` }),
+          },
+          body: JSON.stringify({
+            name: name,
+            email,
+            subject: 'Welcome to Crypto Currency Viewer!',
+            message: 'We are excited to have you join us on this journey!',
+            type: 'signup'
+          }),
+        });
+
+        if (response.ok) {
+          console.log("Signup email sent successfully");
+        } else {
+          console.error("Failed to send signup email");
+        }
+      };
+
+      sendSignupEmail();  // Call the function to send the email
+    }
+  }, [isLoading, error, user, name, email]);
 
   return (
     <div className="row gx-4 gx-lg-5 align-items-center my-3">
