@@ -3,6 +3,16 @@ import { Sparklines, SparklinesLine } from "react-sparklines";
 import $ from "jquery";
 import "datatables.net";
 
+// Function to format numbers in millions (M) or billions (B)
+const formatMarketCap = (num) => {
+  if (num >= 1e9) {
+    return (num / 1e9).toFixed(2) + 'B'; // Convert to billions
+  } else if (num >= 1e6) {
+    return (num / 1e6).toFixed(2) + 'M'; // Convert to millions
+  }
+  return num.toLocaleString(); // Return number with commas for smaller numbers
+};
+
 const Dashboard = () => {
   const [cryptoData, setCryptoData] = useState([]);
   const [totalMarketCap, setTotalMarketCap] = useState(0);
@@ -71,10 +81,7 @@ const Dashboard = () => {
             <strong>Companies:</strong> {cryptoData.length.toLocaleString()}{" "}
             &nbsp;|&nbsp;
             <strong>Total Market Cap:</strong> $
-            {totalMarketCap.toLocaleString("en-US", {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}
+            {formatMarketCap(totalMarketCap)}
           </div>
         </div>
         <div className="table-responsive">
@@ -83,10 +90,10 @@ const Dashboard = () => {
               <tr>
                 <th>Rank</th>
                 <th>Name</th>
-                <th>Market Cap (M)</th>
+                <th>Market Cap</th>
                 <th>Price</th>
                 <th>Today</th>
-                <th>Price (7 days)</th>
+                <th>Price Trend (7 days)</th>
               </tr>
             </thead>
             <tbody>
@@ -101,7 +108,7 @@ const Dashboard = () => {
                     />
                     {crypto.name}
                   </td>
-                  <td>${crypto.marketCap.toLocaleString()}</td>
+                  <td>${formatMarketCap(crypto.marketCap)}</td>
                   <td>${crypto.price}</td>
                   <td
                     style={{
@@ -113,8 +120,8 @@ const Dashboard = () => {
                   <td>
                     <Sparklines
                       data={crypto.sparkline}
-                      svgHeight={30}
-                      svgWidth={120}
+                      svgHeight={50}
+                      svgWidth={150}
                     >
                       <SparklinesLine
                         color={crypto.todayChange >= 0 ? "green" : "red"}
