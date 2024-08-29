@@ -77,6 +77,7 @@ const Dashboard = () => {
             })}
           </div>
         </div>
+        <div className="row">
         <div className="table-responsive">
           <table id="cryptoTable" className="table table-striped display">
             <thead>
@@ -125,6 +126,7 @@ const Dashboard = () => {
               ))}
             </tbody>
           </table>
+        </div>
         </div>
       </div>
     </div>
