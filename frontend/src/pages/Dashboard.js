@@ -84,7 +84,7 @@ const Dashboard = () => {
               <tr>
                 <th>Rank</th>
                 <th>Name</th>
-                <th>Market Cap (M)</th>
+                <th>Market Cap</th>
                 <th>Price</th>
                 <th>Today</th>
                 <th>Price (7 days)</th>
