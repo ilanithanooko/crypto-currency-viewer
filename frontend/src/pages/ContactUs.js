@@ -105,49 +105,18 @@ const ContactUs = () => {
                 <label htmlFor="subject" className="form-label">
                   Subject <span className="text-danger">*</span>
                 </label>
-                <div className="dropdown d-grid">
-                  <button
-                    className="btn border  dropdown-toggle w-100 d-flex justify-content-between align-items-center"
-                    type="button"
-                    id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    {subject}
-                  </button>
-                  <ul
-                    className="dropdown-menu text-start"
-                    aria-labelledby="dropdownMenuButton1"
-                  >
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        type="button"
-                        onClick={() => handleSubjectChange("Finance Consultation")}
-                      >
-                        Finance Consultation
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        type="button"
-                        onClick={() => handleSubjectChange("Administration")}
-                      >
-                        Administration
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        type="button"
-                        onClick={() => handleSubjectChange("Suggestions")}
-                      >
-                        Suggestions
-                      </button>
-                    </li>
-                  </ul>
-                </div>
+                <select
+                  className="form-select"
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
+                  required
+                >
+                  <option value="">Select a subject...</option>
+                  <option value="Finance Consultation">Finance Consultation</option>
+                  <option value="Administration">Administration</option>
+                  <option value="Suggestions">Suggestions</option>
+                  <option value="Suggestions">Other</option>
+                </select>
               </div>
               <div className="col-12">
                 <label htmlFor="message" className="form-label">
