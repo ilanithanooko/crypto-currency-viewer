@@ -102,7 +102,7 @@ const Dashboard = () => {
                     {crypto.name}
                   </td>
                   <td>${crypto.marketCap.toLocaleString()}</td>
-                  <td>${crypto.price}</td>
+                  <td>${crypto.price > 1 ? crypto.price.toLocaleString() : crypto.price.toPrecision(3)}</td>
                   <td
                     style={{
                       color: crypto.todayChange >= 0 ? "green" : "red",
