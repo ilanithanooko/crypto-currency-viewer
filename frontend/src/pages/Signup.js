@@ -12,44 +12,17 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    await signup(email, password);
+    await signup(name, email, password);
   };
-
-  // Trigger email sending after successful signup
-  useEffect(() => {
-    if (!isLoading && !error && user) {  // Check that loading has finished, there is no error, and user is logged in
-      const sendSignupEmail = async () => {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/nodemailer`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            ...(user && { Authorization: `Bearer ${user.token}` }),
-          },
-          body: JSON.stringify({
-            name: name,
-            email,
-            subject: 'Welcome to Crypto Currency Viewer!',
-            message: 'We are excited to have you join us on this journey!',
-            type: 'signup'
-          }),
-        });
-
-        if (response.ok) {
-          console.log("Signup email sent successfully");
-        } else {
-          console.error("Failed to send signup email");
-        }
-      };
-
-      sendSignupEmail();  // Call the function to send the email
-    }
-  }, [isLoading, error, user, name, email]);
 
   return (
     <div className="row gx-4 gx-lg-5 align-items-center my-3">
       <div className="col-lg-7">
-        <img className="img-fluid rounded-4 mb-2 mb-lg-0" src={HeroPicture} alt="Hero" />
+        <img
+          className="img-fluid rounded-4 mb-2 mb-lg-0"
+          src={HeroPicture}
+          alt="Hero"
+        />
       </div>
       <div className="col-lg-5">
         <form className="login" onSubmit={handleSubmit}>
@@ -69,7 +42,7 @@ const Signup = () => {
             />
             <label htmlFor="floatingName">Full Name</label>
           </div>
-          
+
           <div className="form-floating mb-2">
             <input
               type="email"
@@ -81,7 +54,7 @@ const Signup = () => {
             />
             <label htmlFor="floatingInput">Email address</label>
           </div>
-          
+
           <div className="form-floating mb-2">
             <input
               type="password"
@@ -94,14 +67,14 @@ const Signup = () => {
             <label htmlFor="floatingPassword">Password</label>
           </div>
 
-          <button 
-            className="btn btn-lg btn-primary" 
+          <button
+            className="btn btn-lg btn-primary"
             type="submit"
-            disabled={isLoading}  // Disable button while loading
+            disabled={isLoading} // Disable button while loading
           >
             Sign up
           </button>
-          
+
           {error && <div className="mt-2 text-danger">{error}</div>}
         </form>
       </div>

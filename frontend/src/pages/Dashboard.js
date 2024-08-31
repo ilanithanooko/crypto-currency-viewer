@@ -68,7 +68,7 @@ const Dashboard = () => {
         <div className="mb-3 text-center">
           <h3>Cryptocurrency Prices</h3>
           <div>
-            <strong>Companies:</strong> {cryptoData.length.toLocaleString()}{" "}
+            <strong>Currencies:</strong> {cryptoData.length.toLocaleString()}{" "}
             &nbsp;|&nbsp;
             <strong>Total Market Cap:</strong> $
             {totalMarketCap.toLocaleString("en-US", {
@@ -114,10 +114,11 @@ const Dashboard = () => {
                     <Sparklines
                       data={crypto.sparkline}
                       svgHeight={30}
-                      svgWidth={120}
+                      svgWidth={100}
                     >
                       <SparklinesLine
                         color={crypto.todayChange >= 0 ? "green" : "red"}
+                        style={{ fill: "none" }}
                       />
                     </Sparklines>
                   </td>
